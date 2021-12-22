@@ -2,14 +2,12 @@ import prompts  from "prompts";
 import fs from 'fs'
 import {exec , spawn} from "child_process";
 
-import { watchInput } from 'awesome-file-input-watcher';
 
-const input = document.querySelector('#input-id');
 
-watchInput(input, (file) => {
-  console.log(file) // The file of input when it change
+fs.watch("example_file.txt", (eventType, filename) => {
+  console.log("\nThe file", filename, "was modified!");
+  console.log("The type of change was:", eventType);
 });
-
 
 const questions = [
   {
