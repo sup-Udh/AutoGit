@@ -1,4 +1,6 @@
 import prompts  from "prompts";
+import fs from 'fs'
+import {exec , spawn} from "child_process";
 const questions = [
   {
     type: 'text',
@@ -22,7 +24,20 @@ const questions = [
 
   // => response => { username, age, about }
   // Getting the stuff from the user input
-  console.log(response.ProjectDir)
-  console.log(response.GithubRepo)
-  console.log(response.Commit)
+  var projectDir = response.ProjectDir
+  var Githuburl = response.GithubRepo
+  var CommitMsg = response.Commit
+
+  exec('DIR', (err, stdout, stderr) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+    console.log(stdout);
+  });
+  
+  
+
+
 })();
+
