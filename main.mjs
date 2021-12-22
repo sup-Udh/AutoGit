@@ -5,7 +5,7 @@ const questions = [
   {
     type: 'text',
     name: 'ProjectDir',
-    message: 'Your Project Directory?'
+    message: 'Your Project Directory?(Full path)'
   },
   {
     type: 'text',
@@ -28,7 +28,15 @@ const questions = [
   var Githuburl = response.GithubRepo
   var CommitMsg = response.Commit
 
-  exec('DIR', (err, stdout, stderr) => {
+  exec(`cd ${projectDir} `, (err, stdout, stderr) => {
+    if (err) {
+      console.error(err);
+      return;
+    }
+    console.log(stdout);
+  });
+  
+  exec(`DIR ${projectDir} `, (err, stdout, stderr) => {
     if (err) {
       console.error(err);
       return;
@@ -37,6 +45,7 @@ const questions = [
   });
   
   
+
 
 
 })();
