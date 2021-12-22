@@ -1,6 +1,16 @@
 import prompts  from "prompts";
 import fs from 'fs'
 import {exec , spawn} from "child_process";
+
+import { watchInput } from 'awesome-file-input-watcher';
+
+const input = document.querySelector('#input-id');
+
+watchInput(input, (file) => {
+  console.log(file) // The file of input when it change
+});
+
+
 const questions = [
   {
     type: 'text',
@@ -30,7 +40,7 @@ const questions = [
 
   exec(`cd ${projectDir} `, (err, stdout, stderr) => {
     if (err) {
-      console.error(err);
+      console.error('No Directory provided Exiting ');
       return;
     }
     console.log(stdout);
@@ -38,7 +48,7 @@ const questions = [
   
   exec(`DIR ${projectDir} `, (err, stdout, stderr) => {
     if (err) {
-      console.error(err);
+      console.error('No directory specified Exiting');
       return;
     }
     console.log(stdout);
