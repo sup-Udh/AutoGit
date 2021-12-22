@@ -2,19 +2,18 @@ import prompts  from "prompts";
 const questions = [
   {
     type: 'text',
-    name: 'username',
-    message: 'What is your GitHub username?'
-  },
-  {
-    type: 'number',
-    name: 'age',
-    message: 'How old are you?'
+    name: 'ProjectDir',
+    message: 'Your Project Directory?'
   },
   {
     type: 'text',
-    name: 'about',
-    message: 'Tell something about yourself',
-    initial: 'Why should I?'
+    name: 'GithubRepo',
+    message: 'Your Github Clone url?(Set url origin)'
+  },
+  {
+    type: 'text',
+    name: 'Commit',
+    message: 'Your Commit Msg?',
   }
 ];
 
@@ -23,5 +22,7 @@ const questions = [
 
   // => response => { username, age, about }
   // Getting the stuff from the user input
-  console.log(response.username);
+  console.log(response.ProjectDir)
+  console.log(response.GithubRepo)
+  console.log(response.Commit)
 })();
