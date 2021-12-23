@@ -17,15 +17,16 @@ const questions = [
   },
   {
     type: 'text',
-    name: 'GithubRepo',
-    message: 'Your Github Clone url?(Set url origin)'
-  },
-  {
-    type: 'text',
     name: 'OrginSetup',
     message: 'Do you Have your Origin setup? (Y/N)'
 
   },
+  {
+    type: 'text',
+    name: 'GithubRepo',
+    message: 'Your Github Clone url?(Set url origin)'
+  },
+  
   {
     type: 'text',
     name: 'Commit',
@@ -86,7 +87,8 @@ const watcher = chokidar.watch(`${projectDir}`, {
 });
 
 // Something to use when events are received.
-const log = console.log.bind(console);
+var log = console.log('log.')
+
 // Add event listeners.
 watcher
   .on('add', path => log(
