@@ -2,13 +2,11 @@ import prompts  from "prompts";
 import fs from 'fs'
 import {exec , spawn} from "child_process";
 import chokidar from "chokidar";
-
 // file watch changes
 fs.watch("./dist", (eventType, filename) => {
   console.log("\nThe file", filename, "was modified!");
   console.log("The type of change was:", eventType);
 });
-
 const questions = [
   {
     type: 'text',
@@ -19,7 +17,6 @@ const questions = [
     type: 'text',
     name: 'OrginSetup',
     message: 'Do you Have your Origin setup? (Y/N)'
-
   },
   {
     type: 'text',
@@ -36,7 +33,6 @@ const questions = [
 var projectDir;
 (async () => {
   const response = await prompts(questions);
-
   // => response => { username, age, about }
   // Getting the stuff from the user input
   var projectDir = response.ProjectDir
@@ -47,7 +43,6 @@ var projectDir;
   if(originDeatils === 'Y'){
     console.log("skipping Adding Remotes origins")
   }
-
   if(originDeatils === 'N'){
     console.log("setting up your origin")
       // The Repo URL for
@@ -58,12 +53,8 @@ var projectDir;
     }
     console.log('successfully Connected to the Repo');
   });
-
-
     
   }
-
-
   exec(`cd ${projectDir} `, (err, stdout, stderr) => {
     if (err) {
       console.error('No Directory provided Exiting ');
@@ -71,7 +62,6 @@ var projectDir;
     }
     console.log('Into the Directory!)')
   });
-
   exec(`DIR ${projectDir} `, (err, stdout, stderr) => {
     if (err) {
       console.error('No Directory provided Exiting ');
@@ -79,7 +69,6 @@ var projectDir;
     }
     console.log(stdout);
   });
-
 // Initialize watcher.
 const watcher = chokidar.watch(`${projectDir}`, {
   ignored: [`${projectDir}/node_modules/**/*`, `${projectDir}/.git/**/*`] , // ignore dotfiles
@@ -96,16 +85,15 @@ watcher
     // child process
     exec(`git add .`, (err, stdout, stderr)=> {
       if(err){
-        console.error("Unable to Add the files Quit the program and try again.")
+        console.error("Waiting for files.")
         return;
       }
       console.log('successfully Added the files.')
     }),
     // Commit files
-
     exec(`git commit -m ${CommitMsg}`, (err, stdout, stderr)=> {
       if(err){
-        console.error("Unable to Commit the files try again! later")
+        console.error("Waiting for files")
         return;
       }
       console.log('successfully Commit the files Ready to push!')
@@ -113,35 +101,23 @@ watcher
     
     exec(`git commit -m ${CommitMsg}`, (err, stdout, stderr)=> {
       if(err){
-        console.error("Unable to Commit the files try again! later")
+        console.error("Waiting for files changes")
         return;
       }
       console.log('successfully Commit the files Ready to push!')
     }),
-
     exec(`git push`, (err, stdout, stderr)=> {
       if(err){
-        console.error("Pushed the file changes")
+        console.error("waiting for files to push.")
         return;
       }
-      console.log(`Pushed to ${Githuburl}`)
+      console.log(`Pushed to You repo`)
     })
   ))
   .on('change', path => log(`File ${path} has been changed`))
   .on('unlink', path => log(`File ${path} has been removed`));
-
-
-
-
 //   var watcher = chokidar.watch(`${projectDir}`, { ignored: /^\./, persistent: true });
-
 // watcher
 //     .on('add', function (path) { console.log('File', path, 'has been added'); ignored: [`${projectDir}/node_modules`] })
-
-
 //     console.log(`start doing something now when a file has been added`);
-
-
-
 })();
-
