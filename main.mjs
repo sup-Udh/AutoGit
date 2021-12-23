@@ -22,6 +22,12 @@ const questions = [
   },
   {
     type: 'text',
+    name: 'OrginSetup',
+    message: 'Do you Have your Origin setup? (Y/N)'
+
+  },
+  {
+    type: 'text',
     name: 'Commit',
     message: 'Your Commit Msg?',
   }
@@ -35,11 +41,12 @@ const questions = [
   var projectDir = response.ProjectDir
   var Githuburl = response.GithubRepo
   var CommitMsg = response.Commit
+  var originDeatils = response.OriginSetup
 
   // The Repo URL for
-  exec(`git remote add origin  ${projectDir} `, (err, stdout, stderr) => {
+  exec(`git remote add origin  ${Githuburl} `, (err, stdout, stderr) => {
     if (err) {
-      console.error('Invaild Repo');
+      console.error(err);
       return;
     }
     console.log('successfully Connected to the Repo');
