@@ -2,11 +2,9 @@ import prompts  from "prompts";
 import fs from 'fs'
 import {exec , spawn} from "child_process";
 import chokidar from "chokidar";
-// file watch changes
-fs.watch("./dist", (eventType, filename) => {
-  console.log("\nThe file", filename, "was modified!");
-  console.log("The type of change was:", eventType);
-});
+
+
+
 const questions = [
   {
     type: 'text',
