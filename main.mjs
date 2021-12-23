@@ -92,7 +92,38 @@ watcher
   .on('add', path => log(
     // On add new file.
     // child process
-    exec(`git add .`)
+    exec(`git add .`, (err, stdout, stderr)=> {
+      if(err){
+        console.error("Unable to Add the files Quit the program and try again.")
+        return;
+      }
+      console.log('successfully Added the files.')
+    }),
+    // Commit files
+
+    exec(`git commit -m ${CommitMsg}`, (err, stdout, stderr)=> {
+      if(err){
+        console.error("Unable to Commit the files try again! later")
+        return;
+      }
+      console.log('successfully Commit the files Ready to push!')
+    }),
+    
+    exec(`git commit -m ${CommitMsg}`, (err, stdout, stderr)=> {
+      if(err){
+        console.error("Unable to Commit the files try again! later")
+        return;
+      }
+      console.log('successfully Commit the files Ready to push!')
+    }),
+
+    exec(`git push`, (err, stdout, stderr)=> {
+      if(err){
+        console.error("Pushed the file changes")
+        return;
+      }
+      console.log(`Pushed to ${Githuburl}`)
+    })
   ))
   .on('change', path => log(`File ${path} has been changed`))
   .on('unlink', path => log(`File ${path} has been removed`));
