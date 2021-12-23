@@ -42,15 +42,25 @@ const questions = [
   var Githuburl = response.GithubRepo
   var CommitMsg = response.Commit
   var originDeatils = response.OriginSetup
+  
+  if(originDeatils === 'Y'){
+    console.log("skipping Adding Remotes origins")
+  }
 
-  // The Repo URL for
+  if(originDeatils === 'N'){
+    console.log("setting up your origin")
+      // The Repo URL for
   exec(`git remote add origin  ${Githuburl} `, (err, stdout, stderr) => {
     if (err) {
-      console.error(err);
+      console.error('Oh no! The Origin Already Exists!');
       return;
     }
     console.log('successfully Connected to the Repo');
   });
+
+
+    
+  }
 
 
   exec(`cd ${projectDir} `, (err, stdout, stderr) => {
