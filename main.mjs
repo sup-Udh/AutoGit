@@ -32,7 +32,7 @@ const questions = [
     message: 'Your Commit Msg?',
   }
 ];
-
+var projectDir;
 (async () => {
   const response = await prompts(questions);
 
@@ -71,10 +71,28 @@ const questions = [
     console.log('Into the Directory!)')
   });
 
+  exec(`DIR ${projectDir} `, (err, stdout, stderr) => {
+    if (err) {
+      console.error('No Directory provided Exiting ');
+      return;
+    }
+    console.log(stdout);
+  });
 
-  chokidar.watch(`${projectDir}`, {ignored: [`${projectDir}/node_modules/**/* `,` ${projectDir}/.git/**/*'`]
-}).on('add', function (path) { console.log('File', path, 'has been added')});
-console.log(`start doing something now when a file has been added`);
+// Initialize watcher.
+const watcher = chokidar.watch(`${projectDir}`, {
+  ignored: [`${projectDir}/node_modules/**/*`, `${projectDir}/.git/**/*`] , // ignore dotfiles
+  persistent: true
+});
+
+// Something to use when events are received.
+const log = console.log.bind(console);
+// Add event listeners.
+watcher
+  .on('add', path => log(`File ${path} has been added`))
+  .on('change', path => log(`File ${path} has been changed`))
+  .on('unlink', path => log(`File ${path} has been removed`));
+
 
 
 
@@ -89,6 +107,4 @@ console.log(`start doing something now when a file has been added`);
 
 
 })();
-
-
 
