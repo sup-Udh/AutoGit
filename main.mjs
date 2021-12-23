@@ -89,7 +89,11 @@ const watcher = chokidar.watch(`${projectDir}`, {
 const log = console.log.bind(console);
 // Add event listeners.
 watcher
-  .on('add', path => log(`File ${path} has been added`))
+  .on('add', path => log(
+    // On add new file.
+    // child process
+    exec(`git add .`)
+  ))
   .on('change', path => log(`File ${path} has been changed`))
   .on('unlink', path => log(`File ${path} has been removed`));
 
