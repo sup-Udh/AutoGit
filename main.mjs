@@ -87,7 +87,7 @@ const watcher = chokidar.watch(`${projectDir}`, {
 });
 
 // Something to use when events are received.
-const  log = console.log('Made by Udhay.')
+const log = console.log.bind(console);
 
 // Add event listeners.
 watcher
