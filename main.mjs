@@ -15,11 +15,6 @@ const questions = [
   },
   {
     type: 'text',
-    name: 'OrginSetup',
-    message: 'Do you Have your Origin setup? (Y/N)'
-  },
-  {
-    type: 'text',
     name: 'GithubRepo',
     message: 'Your Github Clone url?(Set url origin)'
   },
@@ -28,8 +23,10 @@ const questions = [
     type: 'text',
     name: 'Commit',
     message: 'Your Commit Msg?',
-  }
+  },
 ];
+
+
 var projectDir;
 (async () => {
   const response = await prompts(questions);
