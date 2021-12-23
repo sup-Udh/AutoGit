@@ -13,11 +13,7 @@ const questions = [
     name: 'ProjectDir',
     message: 'Your Project Directory?(Full path)'
   },
-  {
-    type: 'text',
-    name: 'GithubRepo',
-    message: 'Your Github Clone url?(Set url origin)'
-  },
+
   
   {
     type: 'text',
