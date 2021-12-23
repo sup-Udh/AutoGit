@@ -37,22 +37,23 @@ const questions = [
   var CommitMsg = response.Commit
 
   // The Repo URL for
+  exec(`git remote add origin  ${projectDir} `, (err, stdout, stderr) => {
+    if (err) {
+      console.error('Invaild Repo');
+      return;
+    }
+    console.log('successfully Connected to the Repo');
+  });
+
 
   exec(`cd ${projectDir} `, (err, stdout, stderr) => {
     if (err) {
       console.error('No Directory provided Exiting ');
       return;
     }
-    console.log(stdout);
+    console.log('Into the Directory!')
   });
-  // Seeing Files in the specified Folder
-  exec(`DIR ${projectDir} `, (err, stdout, stderr) => {
-    if (err) {
-      console.error('No directory specified Exiting');
-      return;
-    }
-    console.log(stdout);
-  });
+
   
   
 
