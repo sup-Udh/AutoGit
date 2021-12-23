@@ -99,7 +99,7 @@ watcher
       console.log('successfully Commit the files Ready to push!')
     }),
 
-    
+
     
     exec(`git commit -m ${CommitMsg}`, (err, stdout, stderr)=> {
       if(err){
@@ -117,6 +117,7 @@ watcher
     })
   ))
   .on('change', path => log(
+    
 
     exec(`git add .`, (err, stdout, stderr)=> {
       if(err){
@@ -150,7 +151,40 @@ watcher
     })
 
   ))
-  .on('unlink', path => log(`File ${path} has been removed`));
+  // If a Folder was removed
+  .on('unlink', path => log(
+    
+    exec(`git add .`, (err, stdout, stderr)=> {
+      if(err){
+        console.error("Waiting for files.")
+        return;
+      }
+      console.log('successfully Added the files.')
+    }),
+    // Commit files
+    exec(`git commit -m ${CommitMsg}`, (err, stdout, stderr)=> {
+      if(err){
+        console.error("Waiting for files")
+        return;
+      }
+      console.log('successfully Commit the files Ready to push!')
+    }),
+    
+    exec(`git commit -m ${CommitMsg}`, (err, stdout, stderr)=> {
+      if(err){
+        console.error("Waiting for files changes")
+        return;
+      }
+      console.log('successfully Commit the files Ready to push!')
+    }),
+    exec(`git push`, (err, stdout, stderr)=> {
+      if(err){
+        console.error("waiting for files to push.")
+        return;
+      }
+      console.log(`Pushed to You repo`)
+    })
+  ));
 //   var watcher = chokidar.watch(`${projectDir}`, { ignored: /^\./, persistent: true });
 // watcher
 //     .on('add', function (path) { console.log('File', path, 'has been added'); ignored: [`${projectDir}/node_modules`] })
