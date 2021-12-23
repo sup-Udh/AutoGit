@@ -71,13 +71,15 @@ const questions = [
     console.log('Into the Directory!)')
   });
 
-})();
-
-var watcher = chokidar.watch('./dist', { ignored: /^\./, persistent: true });
+  var watcher = chokidar.watch('./dist', { ignored: /^\./, persistent: true });
 
 watcher
     .on('add', function (path) { console.log('File', path, 'has been added'); })
 
 
     console.log(`start doing something now when a file has been added`);
+
+})();
+
+
 
