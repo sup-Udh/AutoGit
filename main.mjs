@@ -3,8 +3,8 @@ import fs from 'fs'
 import {exec , spawn} from "child_process";
 
 
-
-fs.watch("example_file.txt", (eventType, filename) => {
+// file watch changes
+fs.watch("./dist", (eventType, filename) => {
   console.log("\nThe file", filename, "was modified!");
   console.log("The type of change was:", eventType);
 });
@@ -36,6 +36,8 @@ const questions = [
   var Githuburl = response.GithubRepo
   var CommitMsg = response.Commit
 
+  // The Repo URL for
+
   exec(`cd ${projectDir} `, (err, stdout, stderr) => {
     if (err) {
       console.error('No Directory provided Exiting ');
@@ -43,7 +45,7 @@ const questions = [
     }
     console.log(stdout);
   });
-  
+  // Seeing Files in the specified Folder
   exec(`DIR ${projectDir} `, (err, stdout, stderr) => {
     if (err) {
       console.error('No directory specified Exiting');
