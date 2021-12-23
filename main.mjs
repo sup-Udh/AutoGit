@@ -98,6 +98,8 @@ watcher
       }
       console.log('successfully Commit the files Ready to push!')
     }),
+
+    
     
     exec(`git commit -m ${CommitMsg}`, (err, stdout, stderr)=> {
       if(err){
@@ -114,7 +116,40 @@ watcher
       console.log(`Pushed to You repo`)
     })
   ))
-  .on('change', path => log(`File ${path} has been changed`))
+  .on('change', path => log(
+
+    exec(`git add .`, (err, stdout, stderr)=> {
+      if(err){
+        console.error("Waiting for files.")
+        return;
+      }
+      console.log('successfully Added the files.')
+    }),
+    // Commit files
+    exec(`git commit -m ${CommitMsg}`, (err, stdout, stderr)=> {
+      if(err){
+        console.error("Waiting for files")
+        return;
+      }
+      console.log('successfully Commit the files Ready to push!')
+    }),
+    
+    exec(`git commit -m ${CommitMsg}`, (err, stdout, stderr)=> {
+      if(err){
+        console.error("Waiting for files changes")
+        return;
+      }
+      console.log('successfully Commit the files Ready to push!')
+    }),
+    exec(`git push`, (err, stdout, stderr)=> {
+      if(err){
+        console.error("waiting for files to push.")
+        return;
+      }
+      console.log(`Pushed to You repo`)
+    })
+
+  ))
   .on('unlink', path => log(`File ${path} has been removed`));
 //   var watcher = chokidar.watch(`${projectDir}`, { ignored: /^\./, persistent: true });
 // watcher
