@@ -71,7 +71,7 @@ const questions = [
     console.log('Into the Directory!)')
   });
 
-  chokidar.watch(`${projectDir}`, {ignored: [`${projectDir}/node_modules/**/*`]
+  chokidar.watch(`${projectDir}`, {ignored: [`${projectDir}/node_modules/**/* , ${projectDir}/.git/**/*'`]
 }).on('add', function (path) { console.log('File', path, 'has been added')});
 console.log(`start doing something now when a file has been added`);
 
