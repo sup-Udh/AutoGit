@@ -1,7 +1,7 @@
 import prompts  from "prompts";
 import fs from 'fs'
 import {exec , spawn} from "child_process";
-
+import chokidar from "chokidar";
 
 // file watch changes
 fs.watch("./dist", (eventType, filename) => {
@@ -71,10 +71,13 @@ const questions = [
     console.log('Into the Directory!)')
   });
 
-  
-  
-
-
-
 })();
+
+var watcher = chokidar.watch('./dist', { ignored: /^\./, persistent: true });
+
+watcher
+    .on('add', function (path) { console.log('File', path, 'has been added'); })
+
+
+    console.log(`start doing something now when a file has been added`);
 
