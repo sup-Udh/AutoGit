@@ -51,7 +51,7 @@ const questions = [
       console.error('No Directory provided Exiting ');
       return;
     }
-    console.log('Into the Directory!')
+    console.log('Into the Directory!)')
   });
 
   
