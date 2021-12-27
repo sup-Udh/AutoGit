@@ -2,8 +2,7 @@ import prompts  from "prompts";
 import fs from 'fs'
 import {exec , spawn} from "child_process";
 import chokidar from "chokidar";
-
-
+// Importing the Config files. 
 
 const questions = [
   {
