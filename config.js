@@ -1,4 +1,4 @@
 module.exports={
-    ProjectDirectory: '',
+    ProjectDirectory: 'C:\\AutoGit',
     CommitMessage: 'Testmsg', 
 }

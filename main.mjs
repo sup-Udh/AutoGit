@@ -22,10 +22,15 @@ const questions = [
 (async () => {
   const response = await prompts(questions);
   const customConfig = response.customConfig
-
   const Dir = CONFIG.ProjectDirectory
   const msg  = CONFIG.CommitMessage
+  
+  if(customConfig === "N"){
+    console.log("Quitting.")
+  }
 
+  if(customConfig === "Y"){
+    
   if(!Dir ){
     console.log()
     console.log('The path provided in the Config file, is null PLease Fix it')
@@ -44,16 +49,20 @@ const questions = [
     .on('change', path => log(`File ${path} has been changed`))
     .on('unlink', path => log(`File ${path} has been removed`));
   }
-  // if(!msg){
-  //   console.log()
-  //   console.log("No commit msg Provided in the Config file try agin")
-  // }else{
-  //   console.log()
-  //   console.log("Recivied the Commit Message from Config file")
-  // }
+  if(!msg){
+    console.log()
+    console.log("No commit msg Provided in the Config file try agin")
+  }else{
+    console.log()
+    console.log("Recivied the Commit Message from Config file")
+  }
 
-  // Setting up the watcher
+    
+  }
 
+
+
+  
 
 
  
