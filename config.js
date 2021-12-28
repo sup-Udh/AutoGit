@@ -1,3 +1,4 @@
 module.exports={
-    CommitMessage: 'Testmsg'
+    ProjectDirectory: '',
+    CommitMessage: 'Testmsg', 
 }
