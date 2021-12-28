@@ -46,7 +46,7 @@ const questions = [
     });
 
 
-    const log = console.log("ready.");
+    const log = console.log.bind(console);
   
     watcher
     .on('add', path => log(
@@ -88,7 +88,7 @@ const questions = [
     .on('change', path => log(`File ${path} has been changed`))
     .on('unlink', path => log(`File ${path} has been removed`));
   }
-
+  
   if(!msg){
     console.log()
     console.log("No commit msg Provided in the Config file try agin")
