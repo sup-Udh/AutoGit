@@ -162,11 +162,5 @@ const questions = [
     
   }
 
-
-
-
-
-
- 
 })();
 
