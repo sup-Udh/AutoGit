@@ -46,7 +46,7 @@ const questions = [
     });
 
 
-    const log = console.log.bind(console);
+    const log = console.log.bind();
   
     watcher
     .on('add', path => log(
