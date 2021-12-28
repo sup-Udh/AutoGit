@@ -9,6 +9,8 @@ import CONFIG  from './config.js'
 
 const questions = [
   // Custom Configuration
+
+
   {
     type: "text",
     name: "customConfig",
@@ -42,13 +44,51 @@ const questions = [
       ignored: [`${Dir}/node_modules/**/*`, `${Dir}/.git/**/*`] , // ignore dotfiles
       persistent: true
     });
-    const log = console.log.bind(console);
+
+
+    const log = console.log("ready.");
   
     watcher
-    .on('add', path => log(`File ${path} has been added`))
+    .on('add', path => log(
+      // On add new file.
+      // child process
+      exec(`git add .`, (err, stdout, stderr)=> {
+        if(err){
+          console.error("Waiting for files.")
+          return;
+        }
+        console.log('successfully Added the files.')
+      }),
+      // Commit files
+      exec(`git commit -m ${msg}`, (err, stdout, stderr)=> {
+        if(err){
+          console.error("Waiting for files")
+          return;
+        }
+        console.log('successfully Commit the files Ready to push!')
+      }),
+      
+      exec(`git commit -m ${msg}`, (err, stdout, stderr)=> {
+        if(err){
+          console.error("Waiting for files changes")
+          return;
+        }
+        console.log('successfully Commit the files Ready to push!')
+      }),
+      exec(`git push`, (err, stdout, stderr)=> {
+        if(err){
+          console.error("waiting for files to push.")
+          return;
+        }
+        console.log(`Pushed to You repo`)
+      })
+    ))
+    
+    
     .on('change', path => log(`File ${path} has been changed`))
     .on('unlink', path => log(`File ${path} has been removed`));
   }
+
   if(!msg){
     console.log()
     console.log("No commit msg Provided in the Config file try agin")
@@ -62,7 +102,7 @@ const questions = [
 
 
 
-  
+
 
 
  
